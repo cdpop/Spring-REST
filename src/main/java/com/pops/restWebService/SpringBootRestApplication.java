@@ -8,6 +8,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 
+import io.swagger.annotations.Info;
+import io.swagger.annotations.SwaggerDefinition;
+
 @SpringBootApplication
 public class SpringBootRestApplication {
 
@@ -15,6 +18,8 @@ public class SpringBootRestApplication {
 		SpringApplication.run(SpringBootRestApplication.class, args);
 		
 	}
+	
+	
 	
 	@Bean
 	public LocaleResolver localeResolver() {
