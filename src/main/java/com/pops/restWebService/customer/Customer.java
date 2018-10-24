@@ -1,10 +1,12 @@
 package com.pops.restWebService.customer;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
@@ -31,6 +33,9 @@ public class Customer {
 	@ApiModelProperty(notes="Birthday must be in past")
 	private Date birthDate;
 	
+	@OneToMany(mappedBy="customer")
+	private List<Post> posts;
+	
 //	default no argument constructor needed
 	protected Customer() {
 		
@@ -54,6 +59,15 @@ public class Customer {
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
+	
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
+
 	@Override
 	public String toString() {
 		return "Customer [id=" + id + ", name=" + name + ", birthDate=" + birthDate + "]";
