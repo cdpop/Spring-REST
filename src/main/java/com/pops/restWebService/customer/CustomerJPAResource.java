@@ -3,6 +3,7 @@ package com.pops.restWebService.customer;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -21,10 +22,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 // customer resource or controller
 // this is more of a resource
 @RestController
-public class CustomerResource {
+public class CustomerJPAResource {
 
 	@Autowired
-	private CustomerDAOService service;
+	private CustomerRepository service;
 
 //	internationalization for RESTful
 	
@@ -37,16 +38,19 @@ public class CustomerResource {
 
 	@GetMapping(path = "/customer/{customerID}")
 	public Resource<Customer> findcustomer(@PathVariable int customerID) {
-		Customer customer = service.fineOne(customerID);
+		
+//		when you find by ID it exists or not
+//		this returns back with a proper object
+		Optional<Customer> customer = service.findById(customerID);
 
-		if (customer == null)
+		if (!customer.isPresent())
 			throw new CustomerNotFoundException("id -" + customerID);
 
 //		all customers, SERVER_PATH + /customers
 		
 //		HATEOAS
 //		resource says this is the data we want to use
-		Resource<Customer> resource = new Resource<Customer>(customer);
+		Resource<Customer> resource = new Resource<Customer>(customer.get());
 		
 //		enables to create links from methods
 		ControllerLinkBuilder linkTo = linkTo(methodOn(this.getClass()).getAllcustomers());
@@ -60,11 +64,7 @@ public class CustomerResource {
 //	void will give you a 200 error a empty thing
 	@DeleteMapping(path = "/customer/{customerID}")
 	public void deletecustomer(@PathVariable int customerID) {
-		Customer customer = service.deleteById(customerID);
-
-		if (customer == null)
-			throw new CustomerNotFoundException("id -" + customerID);
-
+		service.deleteById(customerID);
 	}
 
 //	input - detail of customer
