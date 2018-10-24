@@ -28,6 +28,12 @@ repositories {
 dependencies {
 	implementation('org.springframework.boot:spring-boot-starter-data-jpa')
 	implementation('org.springframework.boot:spring-boot-starter-web')
+	
+	
+	// simple Authentication
+	// while working on JPA i disabled security
+	//implementation('org.springframework.boot:spring-boot-starter-security')
+	
 	// HATEOAS is still hit or miss most people don't use it
 	implementation('org.springframework.boot:spring-boot-starter-hateoas')
 	// converts from JSON to XML format for rest API
@@ -45,6 +51,7 @@ dependencies {
 	
 	// dev tools to avoid restarting your webserver constantly
 	runtimeOnly('org.springframework.boot:spring-boot-devtools')
+	
 	runtimeOnly('com.h2database:h2')
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 }

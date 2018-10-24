@@ -12,10 +12,10 @@ import io.swagger.annotations.Info;
 import io.swagger.annotations.SwaggerDefinition;
 
 @SpringBootApplication
-public class SpringBootRestApplication {
+public class RestfulWebServicesApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringBootRestApplication.class, args);
+		SpringApplication.run(RestfulWebServicesApplication.class, args);
 		
 	}
 	
